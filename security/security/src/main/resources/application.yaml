@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: Spring security base
+
+  datasource:
+    url: jdbc:postgresql://213.136.80.48:5435/bt?currentSchema=public&stringtype=unspecified
+    username: truongdq
+    password: 123456
+    driverClassName: org.postgresql.Driver
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: public
+    hibernate:
+      ddl-auto: update
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+server:
+  port: 9090
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug
+        type:
+          descriptor:
+            sql:
+              BasicBinder: trace
+
+jwt:
+  secret: 5367566B59703373367639792F423F4528482B4D6251655468576D5A71347437
+  access-token:
+    expiration: 18000000
+  refresh-token:
+    expiration: 86400000
+
+api:
+  prefix: /api
