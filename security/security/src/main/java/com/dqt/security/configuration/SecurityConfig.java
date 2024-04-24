@@ -31,13 +31,15 @@ public class SecurityConfig {
     private final CustomUserDetailsService userDetailsService;
 
     private static final String[] WHITE_LIST_URL = {"/api/auth/**",
-            "/api-docs/**",
-            "/swagger-resources/**",
-            "/configuration/ui",
-            "/configuration/security",
+            "/v3/api-docs/**", "/swagger-ui/**",
+            "/swagger-ui.html/swagger-config",
+            "/swagger-ui/swagger-ui-bundle.js",
+            "/swagger-ui/swagger-initializer.js",
+            "/swagger-ui/index.css",
             "/swagger-ui/**",
-            "/webjars/**",
-            "/swagger-ui.html"};
+            "/swagger-ui.html",
+            "/swagger-ui/swagger-ui.css",
+            "/swagger-ui/index.html"};
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
