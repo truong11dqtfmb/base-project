@@ -43,7 +43,7 @@ public class AuthController {
         try {
             ResponseMessage responseMessage = userService.signUp(signUpRequest);
             if (responseMessage.isStatus()) {
-                return new ResponseEntity<>(responseMessage.getMessage(), HttpStatus.OK);
+                return new ResponseEntity<>(responseMessage, HttpStatus.OK);
             }
             return ResponseEntity.badRequest().body(responseMessage);
         } catch (Exception e) {
