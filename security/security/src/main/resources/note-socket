@@ -1,0 +1,55 @@
+WEBSOCKET:
+Bước 1: đăng ký kết nối với websocket
+@Override
+public void registerStompEndpoints(StompEndpointRegistry registry) {
+    registry.addEndpoint("/websocket");
+}
+
+Bước 2: cấu hình prefix url cho client gọi đến server & tạo phòng chat
+@Override
+public void configureMessageBroker(MessageBrokerRegistry config) {
+    config.setApplicationDestinationPrefixes("/app");
+    config.enableSimpleBroker("/topic","username");
+}
+
+Bước 3:
+    - tạo phương thức  client => message(trước xử lý logic) => server   : @MessageMapping         /app/hello
+    - tạo phòng chat   server => message(sau xử lý logic)   => client   : @SendTo                 /topic/greetings
+
+
+=> client gửi lên server URL: /app/hello và phương thức MessageMapping
+=> server sau khi xử lý sẽ đẩy về client(tạo phòng): /topic/greetings
+
+Example:
+    *Các bước WebSocket & Spring Boot:
+1. Config endpoint
+2. Send <-> Recive
+
+(- Server -> Client:
+1. @SendTo(topic)
+2. SimpMessagingTemplate.convertAndSend(topic,data)
+3. SimpMessagingTemplate.convertAndSendToUser(username,topic,data)
+
+- Client -> Server:
+@MessageMapping)
+
+config.setApplicationDestinationPrefixes("/app");
+config.setUserDestinationPrefix("user");
+
+để set prefixes khi Client -> Server
+
+Client:
+1. Stompt.over('ws://localhost:9090/websocket')
+2. Connect()
+3.
+	Subcribe
+	Send
+
+
+Debug Postman:
+    Connect URL: ws://localhost:9090/websocket
+    Client -> Server: @MessageMapping
+    Server -> Client: 1. @SendTo(topic)
+                      2. SimpMessagingTemplate.convertAndSend(topic,data)
+                      3. SimpMessagingTemplate.convertAndSendToUser(username,topic,data)
+

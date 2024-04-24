@@ -31,6 +31,7 @@ public class SecurityConfig {
     private final CustomUserDetailsService userDetailsService;
 
     private static final String[] WHITE_LIST_URL = {"/api/auth/**",
+            "/websocket/**",
             "/v3/api-docs/**", "/swagger-ui/**",
             "/swagger-ui.html/swagger-config",
             "/swagger-ui/swagger-ui-bundle.js",
