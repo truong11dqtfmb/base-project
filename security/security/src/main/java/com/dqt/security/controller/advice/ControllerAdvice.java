@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -22,6 +23,12 @@ public class ControllerAdvice {
     public ResponseEntity<?> handleJwtException(JwtException e) {
         log.error(e.getMessage(), e);
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ResponseMessage.error(e.getMessage()));
+    }
+
+    @ExceptionHandler(value = DisabledException.class)
+    public ResponseEntity<?> handleDisabledExceptionException(DisabledException e) {
+        log.error(e.getMessage(), e);
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ResponseMessage.error("Account is being locked"));
     }
 
     @ExceptionHandler(value = AccessDeniedException.class)

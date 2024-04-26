@@ -135,5 +135,12 @@ public class Utils {
         return false;
     }
 
+    public static String checkNullString(String input) {
+        if(Objects.isNull(input)){
+            return "";
+        }
+        return input;
+    }
+
 
 }
